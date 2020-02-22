@@ -9,5 +9,21 @@
 import Foundation
 
 struct Members {
+    let gender: String?
+    let name: Name?
+    let email: String?
+    let picture: Picture
     
+}
+
+struct Name {
+    let title: String?
+    let first: String?
+    let last: String?
+}
+
+struct Picture {
+      let large: String?
+      let medium: String?
+      let thumbnail: String?
 }
