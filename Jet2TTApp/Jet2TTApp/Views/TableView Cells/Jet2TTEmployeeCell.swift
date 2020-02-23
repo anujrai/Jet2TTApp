@@ -1,5 +1,5 @@
 //
-//  Jet2TTTableViewCell.swift
+//  Jet2TTEmployeeCell.swift
 //  Jet2TTApp
 //
 //  Created by Anuj Rai on 24/02/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Jet2TTTableViewCell: UITableViewCell {
+class Jet2TTEmployeeCell: UITableViewCell {
     
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var genderLabel: UILabel!

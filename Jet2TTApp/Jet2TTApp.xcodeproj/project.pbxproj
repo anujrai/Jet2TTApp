@@ -15,7 +15,7 @@
 		754CF8D424030CFA00483CCF /* employee.json in Resources */ = {isa = PBXBuildFile; fileRef = 754CF8D324030CFA00483CCF /* employee.json */; };
 		754CF8D624030D7800483CCF /* Jet2TTCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CF8D524030D7800483CCF /* Jet2TTCoreDataStack.swift */; };
 		754CF8D924030E9700483CCF /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CF8D824030E9700483CCF /* SpinnerView.swift */; };
-		754CF8DC24030F0900483CCF /* Jet2TTTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CF8DB24030F0900483CCF /* Jet2TTTableViewCell.swift */; };
+		754CF8DC24030F0900483CCF /* Jet2TTEmployeeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CF8DB24030F0900483CCF /* Jet2TTEmployeeCell.swift */; };
 		754CF8DE24030FAB00483CCF /* Jet2TTTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CF8DD24030FAB00483CCF /* Jet2TTTitleView.swift */; };
 		754CF8E02403109C00483CCF /* Jet2TTNoConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CF8DF2403109C00483CCF /* Jet2TTNoConnectionView.swift */; };
 		758B44EE24006594001CEDAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758B44ED24006594001CEDAA /* AppDelegate.swift */; };
@@ -48,7 +48,7 @@
 		754CF8D324030CFA00483CCF /* employee.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = employee.json; sourceTree = "<group>"; };
 		754CF8D524030D7800483CCF /* Jet2TTCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jet2TTCoreDataStack.swift; sourceTree = "<group>"; };
 		754CF8D824030E9700483CCF /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
-		754CF8DB24030F0900483CCF /* Jet2TTTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jet2TTTableViewCell.swift; sourceTree = "<group>"; };
+		754CF8DB24030F0900483CCF /* Jet2TTEmployeeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jet2TTEmployeeCell.swift; sourceTree = "<group>"; };
 		754CF8DD24030FAB00483CCF /* Jet2TTTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jet2TTTitleView.swift; sourceTree = "<group>"; };
 		754CF8DF2403109C00483CCF /* Jet2TTNoConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jet2TTNoConnectionView.swift; sourceTree = "<group>"; };
 		758B44EA24006594001CEDAA /* Jet2TTApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jet2TTApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,7 +126,7 @@
 		754CF8DA24030EE000483CCF /* TableView Cells */ = {
 			isa = PBXGroup;
 			children = (
-				754CF8DB24030F0900483CCF /* Jet2TTTableViewCell.swift */,
+				754CF8DB24030F0900483CCF /* Jet2TTEmployeeCell.swift */,
 			);
 			path = "TableView Cells";
 			sourceTree = "<group>";
@@ -308,7 +308,7 @@
 				754CF8DE24030FAB00483CCF /* Jet2TTTitleView.swift in Sources */,
 				758B44F224006594001CEDAA /* Jet2TTEmployeeViewController.swift in Sources */,
 				758B44EE24006594001CEDAA /* AppDelegate.swift in Sources */,
-				754CF8DC24030F0900483CCF /* Jet2TTTableViewCell.swift in Sources */,
+				754CF8DC24030F0900483CCF /* Jet2TTEmployeeCell.swift in Sources */,
 				754CF8D924030E9700483CCF /* SpinnerView.swift in Sources */,
 				758B44F024006594001CEDAA /* SceneDelegate.swift in Sources */,
 			);
