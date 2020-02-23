@@ -22,6 +22,8 @@
 		754CF8E42403142F00483CCF /* Employee+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CF8E32403142F00483CCF /* Employee+CoreDataProperties.swift */; };
 		754CF8E62403145200483CCF /* EmployeePicture+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CF8E52403145200483CCF /* EmployeePicture+CoreDataClass.swift */; };
 		754CF8E82403146D00483CCF /* EmployeePicture+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CF8E72403146D00483CCF /* EmployeePicture+CoreDataProperties.swift */; };
+		754CF8EA240315B300483CCF /* Jet2TTEmployeeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CF8E9240315B300483CCF /* Jet2TTEmployeeDetailViewController.swift */; };
+		754CF8ED240316C400483CCF /* Jet2TTEmployeeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CF8EC240316C400483CCF /* Jet2TTEmployeeViewModel.swift */; };
 		758B44EE24006594001CEDAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758B44ED24006594001CEDAA /* AppDelegate.swift */; };
 		758B44F024006594001CEDAA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758B44EF24006594001CEDAA /* SceneDelegate.swift */; };
 		758B44F224006594001CEDAA /* Jet2TTEmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758B44F124006594001CEDAA /* Jet2TTEmployeeViewController.swift */; };
@@ -59,6 +61,8 @@
 		754CF8E32403142F00483CCF /* Employee+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Employee+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		754CF8E52403145200483CCF /* EmployeePicture+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EmployeePicture+CoreDataClass.swift"; sourceTree = "<group>"; };
 		754CF8E72403146D00483CCF /* EmployeePicture+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EmployeePicture+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		754CF8E9240315B300483CCF /* Jet2TTEmployeeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jet2TTEmployeeDetailViewController.swift; sourceTree = "<group>"; };
+		754CF8EC240316C400483CCF /* Jet2TTEmployeeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jet2TTEmployeeViewModel.swift; sourceTree = "<group>"; };
 		758B44EA24006594001CEDAA /* Jet2TTApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jet2TTApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		758B44ED24006594001CEDAA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		758B44EF24006594001CEDAA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -139,6 +143,14 @@
 			path = "TableView Cells";
 			sourceTree = "<group>";
 		};
+		754CF8EB240316A900483CCF /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				754CF8EC240316C400483CCF /* Jet2TTEmployeeViewModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
 		758B44E124006594001CEDAA = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +172,7 @@
 		758B44EC24006594001CEDAA /* Jet2TTApp */ = {
 			isa = PBXGroup;
 			children = (
+				754CF8EB240316A900483CCF /* View Model */,
 				754CF8D724030E7E00483CCF /* Views */,
 				754CF8D224030CEB00483CCF /* Resources */,
 				754CF8CB24030B1000483CCF /* Common Classes */,
@@ -190,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				758B44F124006594001CEDAA /* Jet2TTEmployeeViewController.swift */,
+				754CF8E9240315B300483CCF /* Jet2TTEmployeeDetailViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -321,7 +335,9 @@
 				754CF8DE24030FAB00483CCF /* Jet2TTTitleView.swift in Sources */,
 				758B44F224006594001CEDAA /* Jet2TTEmployeeViewController.swift in Sources */,
 				754CF8E62403145200483CCF /* EmployeePicture+CoreDataClass.swift in Sources */,
+				754CF8ED240316C400483CCF /* Jet2TTEmployeeViewModel.swift in Sources */,
 				754CF8E22403140200483CCF /* Employee+CoreDataClass.swift in Sources */,
+				754CF8EA240315B300483CCF /* Jet2TTEmployeeDetailViewController.swift in Sources */,
 				758B44EE24006594001CEDAA /* AppDelegate.swift in Sources */,
 				754CF8DC24030F0900483CCF /* Jet2TTEmployeeCell.swift in Sources */,
 				754CF8D924030E9700483CCF /* SpinnerView.swift in Sources */,

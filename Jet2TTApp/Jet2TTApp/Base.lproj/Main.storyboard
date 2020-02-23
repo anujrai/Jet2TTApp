@@ -33,7 +33,7 @@
                                                         <constraint firstAttribute="height" constant="60" id="x3V-QI-4b3"/>
                                                     </constraints>
                                                 </imageView>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYO-qb-JJ9" customClass="VATitleView" customModule="VAManagerBuddy" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYO-qb-JJ9" customClass="Jet2TTTitleView" customModule="Jet2TTApp" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="21" width="60" height="60"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mr" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JUc-vf-VI4">
@@ -103,6 +103,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="K2Q-RB-ZbT"/>
+                    <connections>
+                        <outlet property="employeeTableView" destination="yqu-Kd-nor" id="kkA-Sw-c2a"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
