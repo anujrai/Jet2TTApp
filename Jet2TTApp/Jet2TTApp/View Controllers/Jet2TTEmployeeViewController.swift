@@ -1,5 +1,5 @@
 //
-//  Jet2TTMemberViewController.swift
+//  Jet2TTEmployeeViewController.swift
 //  Jet2TTApp
 //
 //  Created by Anuj Rai on 22/02/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Jet2TTMemberViewController: UIViewController {
+class Jet2TTEmployeeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		754CF8C824030AA100483CCF /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CF8C724030AA100483CCF /* Reachability.swift */; };
+		754CF8CA24030AE500483CCF /* NetworkWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CF8C924030AE500483CCF /* NetworkWrapper.swift */; };
+		754CF8CD24030B3D00483CCF /* Jet2TTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CF8CC24030B3D00483CCF /* Jet2TTError.swift */; };
 		758B44EE24006594001CEDAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758B44ED24006594001CEDAA /* AppDelegate.swift */; };
 		758B44F024006594001CEDAA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758B44EF24006594001CEDAA /* SceneDelegate.swift */; };
-		758B44F224006594001CEDAA /* Jet2TTMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758B44F124006594001CEDAA /* Jet2TTMemberViewController.swift */; };
+		758B44F224006594001CEDAA /* Jet2TTEmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758B44F124006594001CEDAA /* Jet2TTEmployeeViewController.swift */; };
 		758B44F524006594001CEDAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 758B44F324006594001CEDAA /* Main.storyboard */; };
 		758B44F824006594001CEDAA /* Jet2TTApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 758B44F624006594001CEDAA /* Jet2TTApp.xcdatamodeld */; };
 		758B44FA24006596001CEDAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 758B44F924006596001CEDAA /* Assets.xcassets */; };
@@ -29,10 +32,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		754CF8C724030AA100483CCF /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		754CF8C924030AE500483CCF /* NetworkWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkWrapper.swift; sourceTree = "<group>"; };
+		754CF8CC24030B3D00483CCF /* Jet2TTError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jet2TTError.swift; sourceTree = "<group>"; };
 		758B44EA24006594001CEDAA /* Jet2TTApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jet2TTApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		758B44ED24006594001CEDAA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		758B44EF24006594001CEDAA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		758B44F124006594001CEDAA /* Jet2TTMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jet2TTMemberViewController.swift; sourceTree = "<group>"; };
+		758B44F124006594001CEDAA /* Jet2TTEmployeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jet2TTEmployeeViewController.swift; sourceTree = "<group>"; };
 		758B44F424006594001CEDAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		758B44F724006594001CEDAA /* Jet2TTApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Jet2TTApp.xcdatamodel; sourceTree = "<group>"; };
 		758B44F924006596001CEDAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -62,6 +68,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		754CF8C624030A8000483CCF /* Network Wrapper */ = {
+			isa = PBXGroup;
+			children = (
+				754CF8C724030AA100483CCF /* Reachability.swift */,
+				754CF8C924030AE500483CCF /* NetworkWrapper.swift */,
+			);
+			path = "Network Wrapper";
+			sourceTree = "<group>";
+		};
+		754CF8CB24030B1000483CCF /* Common Classes */ = {
+			isa = PBXGroup;
+			children = (
+				754CF8CC24030B3D00483CCF /* Jet2TTError.swift */,
+			);
+			path = "Common Classes";
+			sourceTree = "<group>";
+		};
 		758B44E124006594001CEDAA = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +106,8 @@
 		758B44EC24006594001CEDAA /* Jet2TTApp */ = {
 			isa = PBXGroup;
 			children = (
+				754CF8CB24030B1000483CCF /* Common Classes */,
+				754CF8C624030A8000483CCF /* Network Wrapper */,
 				758B45152400663B001CEDAA /* Model */,
 				758B4512240065B9001CEDAA /* View Controllers */,
 				758B44ED24006594001CEDAA /* AppDelegate.swift */,
@@ -108,7 +133,7 @@
 		758B4512240065B9001CEDAA /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				758B44F124006594001CEDAA /* Jet2TTMemberViewController.swift */,
+				758B44F124006594001CEDAA /* Jet2TTEmployeeViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -224,7 +249,10 @@
 			files = (
 				758B44F824006594001CEDAA /* Jet2TTApp.xcdatamodeld in Sources */,
 				758B451424006634001CEDAA /* Members.swift in Sources */,
-				758B44F224006594001CEDAA /* Jet2TTMemberViewController.swift in Sources */,
+				754CF8CA24030AE500483CCF /* NetworkWrapper.swift in Sources */,
+				754CF8CD24030B3D00483CCF /* Jet2TTError.swift in Sources */,
+				754CF8C824030AA100483CCF /* Reachability.swift in Sources */,
+				758B44F224006594001CEDAA /* Jet2TTEmployeeViewController.swift in Sources */,
 				758B44EE24006594001CEDAA /* AppDelegate.swift in Sources */,
 				758B44F024006594001CEDAA /* SceneDelegate.swift in Sources */,
 			);
