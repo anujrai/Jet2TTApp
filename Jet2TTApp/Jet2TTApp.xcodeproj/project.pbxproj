@@ -10,6 +10,10 @@
 		754CF8C824030AA100483CCF /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CF8C724030AA100483CCF /* Reachability.swift */; };
 		754CF8CA24030AE500483CCF /* NetworkWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CF8C924030AE500483CCF /* NetworkWrapper.swift */; };
 		754CF8CD24030B3D00483CCF /* Jet2TTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CF8CC24030B3D00483CCF /* Jet2TTError.swift */; };
+		754CF8CF24030C6300483CCF /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CF8CE24030C6300483CCF /* Utility.swift */; };
+		754CF8D124030CA000483CCF /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CF8D024030CA000483CCF /* ImageDownloader.swift */; };
+		754CF8D424030CFA00483CCF /* employee.json in Resources */ = {isa = PBXBuildFile; fileRef = 754CF8D324030CFA00483CCF /* employee.json */; };
+		754CF8D624030D7800483CCF /* Jet2TTCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CF8D524030D7800483CCF /* Jet2TTCoreDataStack.swift */; };
 		758B44EE24006594001CEDAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758B44ED24006594001CEDAA /* AppDelegate.swift */; };
 		758B44F024006594001CEDAA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758B44EF24006594001CEDAA /* SceneDelegate.swift */; };
 		758B44F224006594001CEDAA /* Jet2TTEmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758B44F124006594001CEDAA /* Jet2TTEmployeeViewController.swift */; };
@@ -35,6 +39,10 @@
 		754CF8C724030AA100483CCF /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		754CF8C924030AE500483CCF /* NetworkWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkWrapper.swift; sourceTree = "<group>"; };
 		754CF8CC24030B3D00483CCF /* Jet2TTError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jet2TTError.swift; sourceTree = "<group>"; };
+		754CF8CE24030C6300483CCF /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		754CF8D024030CA000483CCF /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
+		754CF8D324030CFA00483CCF /* employee.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = employee.json; sourceTree = "<group>"; };
+		754CF8D524030D7800483CCF /* Jet2TTCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jet2TTCoreDataStack.swift; sourceTree = "<group>"; };
 		758B44EA24006594001CEDAA /* Jet2TTApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jet2TTApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		758B44ED24006594001CEDAA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		758B44EF24006594001CEDAA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,8 +89,19 @@
 			isa = PBXGroup;
 			children = (
 				754CF8CC24030B3D00483CCF /* Jet2TTError.swift */,
+				754CF8CE24030C6300483CCF /* Utility.swift */,
+				754CF8D024030CA000483CCF /* ImageDownloader.swift */,
+				754CF8D524030D7800483CCF /* Jet2TTCoreDataStack.swift */,
 			);
 			path = "Common Classes";
+			sourceTree = "<group>";
+		};
+		754CF8D224030CEB00483CCF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				754CF8D324030CFA00483CCF /* employee.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		758B44E124006594001CEDAA = {
@@ -106,6 +125,7 @@
 		758B44EC24006594001CEDAA /* Jet2TTApp */ = {
 			isa = PBXGroup;
 			children = (
+				754CF8D224030CEB00483CCF /* Resources */,
 				754CF8CB24030B1000483CCF /* Common Classes */,
 				754CF8C624030A8000483CCF /* Network Wrapper */,
 				758B45152400663B001CEDAA /* Model */,
@@ -228,6 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				758B44FD24006596001CEDAA /* LaunchScreen.storyboard in Resources */,
+				754CF8D424030CFA00483CCF /* employee.json in Resources */,
 				758B44FA24006596001CEDAA /* Assets.xcassets in Resources */,
 				758B44F524006594001CEDAA /* Main.storyboard in Resources */,
 			);
@@ -248,10 +269,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				758B44F824006594001CEDAA /* Jet2TTApp.xcdatamodeld in Sources */,
+				754CF8D624030D7800483CCF /* Jet2TTCoreDataStack.swift in Sources */,
 				758B451424006634001CEDAA /* Members.swift in Sources */,
+				754CF8CF24030C6300483CCF /* Utility.swift in Sources */,
 				754CF8CA24030AE500483CCF /* NetworkWrapper.swift in Sources */,
 				754CF8CD24030B3D00483CCF /* Jet2TTError.swift in Sources */,
 				754CF8C824030AA100483CCF /* Reachability.swift in Sources */,
+				754CF8D124030CA000483CCF /* ImageDownloader.swift in Sources */,
 				758B44F224006594001CEDAA /* Jet2TTEmployeeViewController.swift in Sources */,
 				758B44EE24006594001CEDAA /* AppDelegate.swift in Sources */,
 				758B44F024006594001CEDAA /* SceneDelegate.swift in Sources */,
