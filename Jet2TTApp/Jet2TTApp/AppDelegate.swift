@@ -12,7 +12,7 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    private lazy var coreDataStack = VACoreDataStack.init(modelName: "Jet2TTApp")
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -80,3 +80,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate {
+    
+    func importJSONDataIfNeeded() {
+        
+        let fetchRequest: NSFetchRequest<Employee> = Employee.fetchRequest()
+        var employeeCount = -1
+        do {
+            employeeCount = try coreDataStack.mainContext.count(for: fetchRequest)
+        } catch {
+            print("Employee count failed")
+        }
+        
+        if employeeCount == 0 {
+            importJSONData()
+        }
+    }
+    
+    func importJSONData() {
+        
+        guard let jsonData = readDummyJSONResonse() else { return }
+        var jsonDictionary: [String: AnyObject] = [:]
+        do {
+            jsonDictionary = try JSONSerialization.jsonObject(with: jsonData, options: []) as! [String : AnyObject]
+        } catch let error as NSError {
+            print("Error: \(error.localizedDescription)")
+            abort()
+        }
+        
+        print(jsonDictionary)
+    }
+}

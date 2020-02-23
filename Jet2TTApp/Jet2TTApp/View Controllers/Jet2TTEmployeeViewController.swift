@@ -41,7 +41,7 @@ final class Jet2TTEmployeeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         self.sortBarButtonItem.isEnabled = false
         self.navigationItem.rightBarButtonItem = self.sortBarButtonItem
         self.employeeTableView.estimatedRowHeight = UITableView.automaticDimension
