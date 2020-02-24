@@ -71,6 +71,8 @@ final class Jet2TTEmployeeViewController: UIViewController {
                     self.spinnerView.removeSpinner()
                 }
             }, onFailure: {_ in
+                self.showAlert(title: "Error", message: "Something went wrong. Please try again later.") { (alert, index) in
+                }
                 if isFirstTime {
                     self.spinnerView.removeSpinner()
                 }

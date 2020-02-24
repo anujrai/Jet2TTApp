@@ -54,6 +54,12 @@ final class NetworkWrapper {
                 return
             }
             
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                debugPrint("Bad error from gateway")
+                completionHandler(Jet2TTError.badResponse, nil)
+                return
+            }
+            
             do {
                 let myNewObject = try JSONDecoder().decode(T.self, from: content)
                 debugPrint(myNewObject)
