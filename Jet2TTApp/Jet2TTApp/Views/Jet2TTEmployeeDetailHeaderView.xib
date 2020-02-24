@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="Jet2TTEmployeeDetailHeaderView" customModule="Jet2TTApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="326" height="265"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9VG-E1-5oP">
+                    <rect key="frame" x="0.0" y="0.0" width="326" height="150"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="F7p-iX-zh4"/>
+                        <constraint firstAttribute="width" secondItem="9VG-E1-5oP" secondAttribute="height" multiplier="163:75" id="ndq-Fj-y5l"/>
+                    </constraints>
+                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="black"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e8T-8c-VR4">
+                    <rect key="frame" x="0.0" y="150" width="326" height="115"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anuj Rai" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvH-ez-6cb">
+                            <rect key="frame" x="16" y="70" width="294" height="18.5"/>
+                            <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="vvH-ez-6cb" firstAttribute="top" secondItem="e8T-8c-VR4" secondAttribute="top" constant="70" id="LGh-bd-ANM"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="vvH-ez-6cb" secondAttribute="bottom" constant="16" id="aO0-Bb-IbD"/>
+                        <constraint firstItem="vvH-ez-6cb" firstAttribute="leading" secondItem="e8T-8c-VR4" secondAttribute="leading" constant="16" id="vL8-6n-G7B"/>
+                        <constraint firstAttribute="trailing" secondItem="vvH-ez-6cb" secondAttribute="trailing" constant="16" id="yvQ-Go-lV0"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9YK-RX-QPb">
+                    <rect key="frame" x="113" y="100" width="100" height="100"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile-icon" translatesAutoresizingMaskIntoConstraints="NO" id="AUz-c3-gsI">
+                            <rect key="frame" x="10" y="10" width="80" height="80"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="AUz-c3-gsI" firstAttribute="leading" secondItem="9YK-RX-QPb" secondAttribute="leading" constant="10" id="3D7-9E-h9R"/>
+                        <constraint firstItem="AUz-c3-gsI" firstAttribute="top" secondItem="9YK-RX-QPb" secondAttribute="top" constant="10" id="CVo-Vd-FhG"/>
+                        <constraint firstAttribute="height" constant="100" id="WhV-qG-Cfi"/>
+                        <constraint firstAttribute="bottom" secondItem="AUz-c3-gsI" secondAttribute="bottom" constant="10" id="cvR-4n-5ZH"/>
+                        <constraint firstAttribute="width" constant="100" id="fRO-1T-HbP"/>
+                        <constraint firstAttribute="trailing" secondItem="AUz-c3-gsI" secondAttribute="trailing" constant="10" id="tE2-o6-poc"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="9VG-E1-5oP" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="6KG-MV-67h"/>
+                <constraint firstItem="e8T-8c-VR4" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="9Lt-x8-4gg"/>
+                <constraint firstAttribute="bottom" secondItem="e8T-8c-VR4" secondAttribute="bottom" id="L2q-ZY-9wT"/>
+                <constraint firstItem="9VG-E1-5oP" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="LFv-Ok-Zc5"/>
+                <constraint firstItem="9VG-E1-5oP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="PbQ-zR-FkI"/>
+                <constraint firstItem="9YK-RX-QPb" firstAttribute="top" secondItem="9VG-E1-5oP" secondAttribute="bottom" constant="-50" id="ZeR-Ae-bVO"/>
+                <constraint firstItem="e8T-8c-VR4" firstAttribute="top" secondItem="9VG-E1-5oP" secondAttribute="bottom" id="cKG-np-UTo"/>
+                <constraint firstItem="9YK-RX-QPb" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="fj5-Yd-cn9"/>
+                <constraint firstItem="e8T-8c-VR4" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="lr7-NC-zD2"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="largeProfileImageView" destination="9VG-E1-5oP" id="nCW-Hd-aoi"/>
+                <outlet property="profileImageContainerView" destination="9YK-RX-QPb" id="paK-RS-5fy"/>
+                <outlet property="profileImageView" destination="AUz-c3-gsI" id="ap1-2q-wSZ"/>
+                <outlet property="titleLabel" destination="vvH-ez-6cb" id="nWy-8A-fu3"/>
+            </connections>
+            <point key="canvasLocation" x="113.04347826086958" y="-99.441964285714278"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="default-profile-icon" width="989" height="1001"/>
+    </resources>
+</document>
