@@ -47,7 +47,6 @@ final class Jet2TTEmployeeViewController: UIViewController {
         self.employeeTableView.estimatedRowHeight = UITableView.automaticDimension
         self.employeeTableView.rowHeight = 100.0
         self.title = "Employees"
-        
         startMemberFetch(isFirstTime: true)
     }
     
