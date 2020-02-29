@@ -130,9 +130,10 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		754CF8D724030E7E00483CCF /* Views */ = {
+		754CF8D724030E7E00483CCF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				758B4512240065B9001CEDAA /* View Controllers */,
 				754CF8DA24030EE000483CCF /* TableView Cells */,
 				754CF8D824030E9700483CCF /* SpinnerView.swift */,
 				754CF8DD24030FAB00483CCF /* Jet2TTTitleView.swift */,
@@ -140,7 +141,7 @@
 				754D771424044E1200769039 /* Jet2TTEmployeeDetailHeaderView.swift */,
 				754D771624044E4300769039 /* Jet2TTEmployeeDetailHeaderView.xib */,
 			);
-			path = Views;
+			path = View;
 			sourceTree = "<group>";
 		};
 		754CF8DA24030EE000483CCF /* TableView Cells */ = {
@@ -181,13 +182,12 @@
 		758B44EC24006594001CEDAA /* Jet2TTApp */ = {
 			isa = PBXGroup;
 			children = (
+				758B45152400663B001CEDAA /* Model */,
+				754CF8D724030E7E00483CCF /* View */,
 				754CF8EB240316A900483CCF /* View Model */,
-				754CF8D724030E7E00483CCF /* Views */,
 				754CF8D224030CEB00483CCF /* Resources */,
 				754CF8CB24030B1000483CCF /* Common Classes */,
 				754CF8C624030A8000483CCF /* Network Wrapper */,
-				758B45152400663B001CEDAA /* Model */,
-				758B4512240065B9001CEDAA /* View Controllers */,
 				758B44ED24006594001CEDAA /* AppDelegate.swift */,
 				758B44EF24006594001CEDAA /* SceneDelegate.swift */,
 				758B44F324006594001CEDAA /* Main.storyboard */,

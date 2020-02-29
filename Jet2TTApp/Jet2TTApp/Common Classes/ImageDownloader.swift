@@ -67,21 +67,24 @@ final private class ImageLoader {
         
         let task = session.dataTask(with: url) { (data, response, error) in
             
-            defer { self.runningRequest.removeValue(forKey: uuid)}
-            
-            if let data = data, let image = UIImage(data: data) {
-                self.loadImageRequest[url] = image
-                completion(.success(image))
-                return
-            }
-            
-            guard let error = error else {
-                return
-            }
-            
-            guard (error as NSError).code == NSURLErrorCancelled else {
-                completion(.failure(error))
-                return
+            DispatchQueue.main.async {
+                
+                defer { self.runningRequest.removeValue(forKey: uuid)}
+                
+                if let data = data, let image = UIImage(data: data) {
+                    self.loadImageRequest[url] = image
+                    completion(.success(image))
+                    return
+                }
+                
+                guard let error = error else {
+                    return
+                }
+                
+                guard (error as NSError).code == NSURLErrorCancelled else {
+                    completion(.failure(error))
+                    return
+                }
             }
         }
         

@@ -13,7 +13,6 @@ class Jet2TTEmployeeDetailHeaderView: UIView {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var profileImageContainerView: UIView!
     @IBOutlet var profileImageView: UIImageView!
-    @IBOutlet var largeProfileImageView: UIImageView!
     
     func instantiateHeaderView(with selectedMemberDetail: Member) -> Jet2TTEmployeeDetailHeaderView? {
         guard let memberView = Bundle.main.loadNibNamed("Jet2TTEmployeeDetailHeaderView", owner: self, options: nil)![0] as? Jet2TTEmployeeDetailHeaderView  else { return nil }
@@ -27,12 +26,8 @@ class Jet2TTEmployeeDetailHeaderView: UIView {
         self.backgroundColor = UIColor.randomColor()
         self.titleLabel.text = memberDetail.fullName
         
-        if let urlString = memberDetail.profilePicture.medium, let url = URL.init(string: urlString) {
-            self.profileImageView.loadImage(at: url)
-        }
-        
         if let urlString = memberDetail.profilePicture.large, let url = URL.init(string: urlString) {
-            self.largeProfileImageView.loadImage(at: url)
+            self.profileImageView.loadImage(at: url)
         }
         
     }
