@@ -1,4 +1,4 @@
-# Manager Buddy
+# Jet2TTApp
 
 ## Table of contents
 * [General info](#general-info)
@@ -11,7 +11,7 @@
 * [Contact](#contact)
 
 ## General info
-This is iOS application which helps a manager to keep track of the emplyees he has.This application shows a dummy employee list as home screen and and by seleting any emplyee you get to see the detail information of the employee.
+This is iOS application which helps a manager to keep track of the emplyees he has.This application shows a dummy employee list as home screen and and by selecting any emplyee you get to see the detail information of the employee.
 
 ## Screenshots
 ![Application Icon](./img/AppIcon.png?raw=true "1. Application Icon")
@@ -39,12 +39,13 @@ List of features ready
 * Sort employee by last name or age
 * Delete employee
 * Dark Mode Support
+* Offline support 
 
 ## Status
-Project is: _in progress_
+Project is: Done
 
 ## Inspiration
 Done as a sample project.
 
 ## Contact
-Created by [@DVdroid](anandin02@gmail.com) - feel free to contact me!
+Created by [@anujrai](anuj.rai2489@gmail.com) - feel free to contact me!
