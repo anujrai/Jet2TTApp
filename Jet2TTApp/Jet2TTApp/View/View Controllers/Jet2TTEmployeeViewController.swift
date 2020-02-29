@@ -10,28 +10,50 @@ import UIKit
 
 final class Jet2TTEmployeeViewController: UIViewController {
     
+    private enum UIStateForDataFetching: String {
+        case notConnected
+        case fetching
+        case done
+        case failed
+    }
+    
+    private static let totalCount = 50
     private var deleteEmployeeIndexPath: NSIndexPath? = nil
+    var coreDataStack: Jet2TTCoreDataStack?
     
     private lazy var sortBarButtonItem: UIBarButtonItem = {
         let barButtonItem = UIBarButtonItem(title: "Sort", style: .plain, target: self, action: #selector(showSortMenu))
         return barButtonItem
     }()
     
-    // MARK: - Variables
+    private lazy var coreDataManager: CoreDataManager? = {
+        guard let coreDataStack = self.coreDataStack else { return nil }
+        return CoreDataManager(managedObjectContext: coreDataStack.mainContext, coreDataStack: coreDataStack)
+    }()
+    
+    private lazy var networkFetcher: NetworkFetcher = NetworkFetcher()
+
+    private var viewModel: Jet2TTEmployeeViewModel? {
+        if ReachabilityManager.applicationConnectionMode == .online {
+            return Jet2TTEmployeeViewModel(networkFetcher)
+        } else {
+            guard let coreDataManager = self.coreDataManager else { return nil }
+            return Jet2TTEmployeeViewModel(coreDataManager)
+        }
+    }
+    
     var members: [Member]? {
         didSet {
             self.employeeTableView.reloadData()
         }
     }
     
-    var objJet2TTMemeberViewModel = Jet2TTEmployeeViewModel()
     lazy var spinnerView: SpinnerView = SpinnerView()
     lazy var noConnectionView: Jet2TTNoConnectionView = Jet2TTNoConnectionView { [weak self] in
         self?.retryMemberFetch()
     }
     
     // MARK: - View Life Cycle
-    
     @IBOutlet var employeeTableView: UITableView! {
         didSet {
             self.employeeTableView.dataSource = self
@@ -39,64 +61,89 @@ final class Jet2TTEmployeeViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        ReachabilityManager.updateApplicationConnectionStatus()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        
         self.sortBarButtonItem.isEnabled = false
         self.navigationItem.rightBarButtonItem = self.sortBarButtonItem
         self.employeeTableView.estimatedRowHeight = UITableView.automaticDimension
         self.employeeTableView.rowHeight = 100.0
         self.title = "Employees"
-        startMemberFetch(isFirstTime: true)
+        
+        startMemberFetch()
     }
     
-    private func startMemberFetch(isFirstTime: Bool) {
+    private func startMemberFetch() {
         
-        if !Reachability.isConnectedToNetwork() {
-            noConnectionView.showNoConnectionView(onView: self.view)
+        ReachabilityManager.updateApplicationConnectionStatus()
+        
+        if ReachabilityManager.applicationConnectionMode == .online {
+            updateUIForDataFetchingStatus(.fetching)
+            getMembers()
         } else {
-            noConnectionView.removeNoConnectionView()
-            
-            self.sortBarButtonItem.isEnabled = true
-            
-            if isFirstTime {
-                spinnerView.showSpinner(onView: self.view)
-            }
-            
-            objJet2TTMemeberViewModel.fetchMembers(onSuccess: {
-                print(self.objJet2TTMemeberViewModel.memberResponse ?? "")
-                self.members = self.objJet2TTMemeberViewModel.member
-                if isFirstTime {
-                    self.spinnerView.removeSpinner()
-                }
-            }, onFailure: {_ in
-                self.showAlert(title: "Error", message: "Something went wrong. Please try again later.") { (alert, index) in
-                }
-                if isFirstTime {
-                    self.spinnerView.removeSpinner()
-                }
-            })
+            updateUIForDataFetchingStatus(.notConnected)
+            setReachabilityNotifier()
         }
     }
     
     private func retryMemberFetch() {
-        startMemberFetch(isFirstTime: true)
+        updateUIForDataFetchingStatus(.fetching)
+        getMembers()
     }
     
-    @objc func showSortMenu() {
+    private func getMembers() {
         
-        let alertVC = UIAlertController(title: "Sort By:", message: "Pick a sorting criteria", preferredStyle: .actionSheet)
-        let sortByLastNameAction = UIAlertAction(title: "Last Name", style: .default, handler: sortByLastName)
-        let sortByAgeAction = UIAlertAction(title: "Age", style: .default, handler: sortByAge)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        alertVC.addAction(sortByLastNameAction)
-        alertVC.addAction(sortByAgeAction)
-        alertVC.addAction(cancelAction)
-        
-        present(alertVC, animated: true, completion: nil)
+        viewModel?.getMembers({ [weak self] (members) in
+            self?.members = members
+            self?.updateUIForDataFetchingStatus(.done)
+            
+            }, { [weak self] (error) in
+                
+                self?.updateUIForDataFetchingStatus(.failed)
+                if let error = error as? Jet2TTError, error == Jet2TTError.noRecords {
+                    self?.showNoRecordsPrompt()
+                }
+        })
     }
     
+    @objc private func switchBackToOnlineMode(alertAction: UIAlertAction?) {
+        startMemberFetch()
+    }
+    
+    private func setReachabilityNotifier () {
+        ReachabilityManager.registerToMonitorNetworkChange { reachability in
+            ReachabilityManager.deregisterToMonitorNetworkChange()
+            self.showSwitchToOnlineMode()
+        }
+    }
+    
+    private func updateUIForDataFetchingStatus(_ status: UIStateForDataFetching) {
+        
+        switch status {
+        case .notConnected:
+            noConnectionView.showNoConnectionView(onView: self.view)
+        case .fetching:
+            noConnectionView.removeNoConnectionView()
+            if self.members == nil {
+                spinnerView.showSpinner(onView: self.view)
+            }
+        case .done:
+            if self.members != nil {
+                self.sortBarButtonItem.isEnabled = true
+                self.spinnerView.removeSpinner()
+            }
+        case .failed:
+            if self.members == nil {
+                self.spinnerView.removeSpinner()
+            }
+        }
+    }
 }
 
 
@@ -113,17 +160,11 @@ extension Jet2TTEmployeeViewController: UITableViewDataSource {
         }
         
         guard let members = self.members else { return cell }
-        let member = members[indexPath.row]
-        cell.nameLabel.text = member.fullName
-        cell.genderLabel.text = member.gender
-        cell.titleView.update(with: member.name?.title)
+        let member = members[indexPath.row] as Member
+        cell.configure(withMember: member)
         
-        if let urlString = member.profilePicture.thumbnail, let url = URL.init(string: urlString) {
-            cell.thumbnailImageView.loadImage(at: url)
-        }
-        
-        if (indexPath.row == members.count - 10 && members.count  < self.objJet2TTMemeberViewModel.totalCount ) {
-            self.startMemberFetch(isFirstTime: false)
+        if (indexPath.row == members.count - 10 && members.count  < Jet2TTEmployeeViewController.totalCount ) {
+            startMemberFetch()
         }
         
         return cell
@@ -134,8 +175,20 @@ extension Jet2TTEmployeeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        let detailView = UIStoryboard.instantiateViewcontroller(ofType: Jet2TTEmployeeDetailViewController.self) as! Jet2TTEmployeeDetailViewController
-        detailView.selectedMemeber = self.members?[indexPath.row]
+        
+        let detailView = UIStoryboard.instantiateViewcontroller(ofType: Jet2TTEmployeeViewController.self) as! Jet2TTEmployeeDetailViewController
+        
+        detailView.coreDataManager = self.coreDataManager
+        
+        if var selectedMemeber =  self.members?[indexPath.row] {
+            if ReachabilityManager.applicationConnectionMode == .online {
+                if let cell = tableView.cellForRow(at: indexPath) as? Jet2TTEmployeeCell {
+                    selectedMemeber.picture?.thumbnailData = cell.thumbnailImageView.image?.pngData()
+                }
+            }
+            detailView.selectedMemeber = selectedMemeber
+        }
+        
         self.navigationController?.pushViewController(detailView, animated: true);
     }
     
@@ -149,37 +202,6 @@ extension Jet2TTEmployeeViewController: UITableViewDelegate {
             confirmDelete(memeber: employee)
         }
     }
-    
-    private func confirmDelete(memeber: Member) {
-        
-        let alertVC = UIAlertController.init(title: "Delete Employee", message: "Are you sure you want to permanently delete \(memeber.fullName)?", preferredStyle: .actionSheet)
-        
-        let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: handleDeleteEmployee)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: handleCancelAction)
-        
-        alertVC.addAction(deleteAction)
-        alertVC.addAction(cancelAction)
-        
-        self.popoverPresentationController?.sourceView = self.view
-        self.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.width / 2.0, y: self.view.bounds.height / 2.0, width: 1.0, height: 1.0)
-        present(alertVC, animated: true, completion: nil)
-    }
-    
-    private func handleDeleteEmployee(alertAction: UIAlertAction!) -> Void {
-        
-        if let indexPath = deleteEmployeeIndexPath {
-            employeeTableView.beginUpdates()
-            members?.remove(at: indexPath.row)
-            employeeTableView.deleteRows(at: [(indexPath as IndexPath)], with: .automatic)
-            deleteEmployeeIndexPath = nil
-            employeeTableView.endUpdates()
-        }
-    }
-    
-    private func handleCancelAction(alertAction: UIAlertAction!) -> Void {
-        self.deleteEmployeeIndexPath = nil
-    }
-    
 }
 
 extension Jet2TTEmployeeViewController {
@@ -204,6 +226,79 @@ extension Jet2TTEmployeeViewController {
             }
             self.members = sortedArray
         }
+    }
+}
+
+extension Jet2TTEmployeeViewController {
+    
+    @objc func showSortMenu() {
+        
+        let title = "Sort By:"
+        let message = "Pick a sorting criteria"
+        let sortByLastNameAction = UIAlertAction(title: "Last Name", style: .default, handler: sortByLastName)
+        let sortByAgeAction = UIAlertAction(title: "Age", style: .default, handler: sortByAge)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        UIAlertController.showAlert(inParent: self,
+                                    preferredStyle: .actionSheet,
+                                    withTitle: title,
+                                    alertMessage: message,
+                                    andAlertActions: [sortByLastNameAction, sortByAgeAction, cancelAction])
+    }
+    
+    func showSwitchToOnlineMode() {
+        
+        let title = "Application is Online"
+        let message = "Do you want to switch back to online mode?"
+        let switchBackToOnlineModeAction = UIAlertAction(title: "Ok", style: .default, handler: switchBackToOnlineMode)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        UIAlertController.showAlert(inParent: self,
+                                    preferredStyle: .alert,
+                                    withTitle: title,
+                                    alertMessage: message,
+                                    andAlertActions: [switchBackToOnlineModeAction, cancelAction])
+    }
+    
+    func showNoRecordsPrompt() {
+        let title = "No Records"
+        let message = "No record / records found."
+        let switchBackToOnlineModeAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        
+        UIAlertController.showAlert(inParent: self,
+                                    preferredStyle: .alert,
+                                    withTitle: title,
+                                    alertMessage: message,
+                                    andAlertActions: [switchBackToOnlineModeAction])
+    }
+    
+    private func confirmDelete(memeber: Member) {
+        
+        let title = "Delete Employee"
+        let message = "Are you sure you want to permanently delete \(memeber.fullName)?"
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: handleDeleteEmployee)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: handleCancelAction)
+        
+        UIAlertController.showAlert(inParent: self,
+                                    preferredStyle: .actionSheet,
+                                    withTitle: title,
+                                    alertMessage: message,
+                                    andAlertActions: [deleteAction, cancelAction])
+    }
+    
+    private func handleDeleteEmployee(alertAction: UIAlertAction!) -> Void {
+        
+        if let indexPath = deleteEmployeeIndexPath {
+            employeeTableView.beginUpdates()
+            members?.remove(at: indexPath.row)
+            employeeTableView.deleteRows(at: [(indexPath as IndexPath)], with: .automatic)
+            deleteEmployeeIndexPath = nil
+            employeeTableView.endUpdates()
+        }
+    }
+    
+    private func handleCancelAction(alertAction: UIAlertAction!) -> Void {
+        self.deleteEmployeeIndexPath = nil
     }
 }
 

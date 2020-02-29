@@ -1,15 +1,16 @@
 //
-//  EmployeePicture+CoreDataClass.swift
-//  Jet2TTApp
+//  CD_Dob+CoreDataClass.swift
+//  VAManagerBuddy
 //
 //  Created by Anuj Rai on 24/02/20.
 //  Copyright © 2020 Anuj Rai. All rights reserved.
+//
 //
 
 import Foundation
 import CoreData
 
 
-public class EmployeePicture: NSManagedObject {
+public class CD_Dob: NSManagedObject {
 
 }

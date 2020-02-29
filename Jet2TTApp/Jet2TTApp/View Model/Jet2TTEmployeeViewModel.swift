@@ -8,45 +8,60 @@
 
 import Foundation
 
+protocol MemberFetchable {
+    func fetchMembers(onSuccess success: @escaping ([Member]?) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
+}
+
 final class Jet2TTEmployeeViewModel {
     
     // MARK: - Variables
     private static let memberUrlString = "https://randomuser.me/api/?results=20"
-    var memberResponse: MemberResponse?
-    var member:[Member]?
-    var totalCount = 200
+    private var memberResponse: MemberResponse?
     
-    func fetchMembers(onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: Error?) -> Void) {
+    let dataSource: MemberFetchable
+    init(_ dataSource: MemberFetchable) {
+        self.dataSource = dataSource
+    }
+    
+    func getMembers(_ success: @escaping ([Member]?)->Void, _ failure: @escaping (Error?)->Void) {
+        return dataSource.fetchMembers(onSuccess: { (member) in
+            success(member)
+        }, onFailure: { (error) in
+        failure(error)
+        })
+    }
+}
+
+final class NetworkFetcher: MemberFetchable {
+    
+    private var members: [Member]?
+    private var memberResponse: MemberResponse?
+    private static let memberUrlString = "https://randomuser.me/api/?results=20"
+    
+    func fetchMembers(onSuccess success: @escaping ([Member]?) -> Void, onFailure failure: @escaping (Error?) -> Void) {
         guard let memberURL = URL(string: type(of: self).memberUrlString) else { return }
-        
-        guard Reachability.isConnectedToNetwork() else {
-            failure(Jet2TTError.noInternet)
-            return
-        }
         
         NetworkWrapper.sharedInstance.makeNetworkRequest(url: memberURL, modelResponse: MemberResponse.self) { (error, response) in
             
-            DispatchQueue.main.async {
-                guard let response = response, error == nil else {
-                    failure(error)
+            guard let response = response, error == nil else {
+                failure(error)
+                return
+            }
+            if self.members == nil {
+                self.memberResponse = response
+                self.members = response.results
+            } else {
+                guard let result = response.results else {
+                    success(self.members)
                     return
                 }
-                if self.member == nil {
-                    self.memberResponse = response
-                    self.member = response.results
-                } else {
-                    guard let result = response.results else {
-                        success()
-                        return
-                    }
-                    
-                    for member in result {
-                        self.member?.append(member)
-                    }
+                
+                for member in result {
+                    self.members?.append(member)
                 }
-                success()
             }
+            
+            success(self.members)
         }
     }
-    
 }

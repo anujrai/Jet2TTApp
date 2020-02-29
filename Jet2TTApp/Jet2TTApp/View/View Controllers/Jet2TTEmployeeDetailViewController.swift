@@ -13,9 +13,11 @@ final class Jet2TTEmployeeDetailViewController: UIViewController {
     // MARK: - Variables
 
     var selectedMemeber: Member?
+    var coreDataManager: CoreDataManager?
     
     // MARK: - View Life Cycle
 
+   // MARK: - View Life Cycle
     @IBOutlet var employeeDetailTableView: UITableView! {
         didSet {
             self.employeeDetailTableView.dataSource = self
@@ -23,14 +25,18 @@ final class Jet2TTEmployeeDetailViewController: UIViewController {
         }
     }
     
+    private lazy var headerView: MemberDetailHeaderView? = {
+        guard let selectedMemeber = self.selectedMemeber else { return nil }
+        return MemberDetailHeaderView().instantiateHeaderView(with: selectedMemeber)
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.employeeDetailTableView.estimatedRowHeight = UITableView.automaticDimension
         self.title = "Employees"
-        guard let selectedMemeber = self.selectedMemeber, let headerView = Jet2TTEmployeeDetailHeaderView().instantiateHeaderView(with: selectedMemeber) else { return }
+        guard let headerView = self.headerView else { return }
         self.employeeDetailTableView.tableHeaderView = headerView
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -51,6 +57,19 @@ final class Jet2TTEmployeeDetailViewController: UIViewController {
         self.employeeDetailTableView.tableHeaderView = headerView
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+           super.viewWillDisappear(animated)
+           
+           if ReachabilityManager.applicationConnectionMode == .online {
+               //Store Images
+               guard let headerView = self.headerView, let coreDataManager = self.coreDataManager, let selectedMember = self.selectedMemeber
+                   else { return }
+               coreDataManager.storeMember(member: selectedMember,
+                                           selectedMember.picture?.thumbnailData,
+                                           headerView.largeProfileImageView.image?.pngData(),
+                                           mediumData: headerView.profileImageView.image?.pngData())
+           }
+       }
 }
 
 extension Jet2TTEmployeeDetailViewController: UITableViewDataSource {

@@ -71,3 +71,29 @@ extension UIViewController {
         self.present(controller, animated: true, completion: nil)
     }
 }
+
+extension UIAlertController {
+    
+    class func showAlert(inParent parent: UIViewController,
+                         preferredStyle style: Style,
+                         withTitle title: String,
+                         alertMessage message: String,
+                         andAlertActions actions: [UIAlertAction]?) {
+        
+        let alertVC = UIAlertController(title: title,
+                                        message: message,
+                                        preferredStyle: style)
+        
+        if let alertActions = actions {
+            _ = alertActions.map{ alertVC.addAction($0) }
+        }
+        
+        parent.popoverPresentationController?.sourceView = parent.view
+        parent.popoverPresentationController?.sourceRect = CGRect(x: parent.view.bounds.width / 2.0,
+                                                                  y: parent.view.bounds.height / 2.0,
+                                                                  width: 1.0,
+                                                                  height: 1.0)
+        
+        parent.present(alertVC, animated: true, completion: nil)
+    }
+}

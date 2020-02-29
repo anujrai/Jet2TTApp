@@ -28,4 +28,24 @@ class Jet2TTEmployeeCell: UITableViewCell {
         self.thumbnailImageView.image = UIImage(named: "default-profile-icon")!
     }
     
+    func configure(withMember member: Member) {
+        self.nameLabel.text = member.fullName
+        self.genderLabel.text = member.gender
+        self.titleView.update(with: member.name?.title)
+        self.updateThumbnail(forMember: member)
+    }
+    
+    private func updateThumbnail(forMember member: Member) {
+        
+        if ReachabilityManager.applicationConnectionMode == .online {
+            if let urlString = member.picture?.thumbnail,
+                let url = URL(string: urlString) {
+                self.thumbnailImageView.loadImage(at: url)
+            }
+        } else {
+            if let imageData = member.picture?.thumbnailData {
+                self.thumbnailImageView.image = UIImage(data: imageData)
+            }
+        }
+    }
 }

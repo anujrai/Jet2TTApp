@@ -12,6 +12,8 @@ enum Jet2TTError: Error {
     case unknown
     case noInternet
     case badResponse
+    case noRecords
+
 }
 
 extension Jet2TTError: LocalizedError {
@@ -23,6 +25,8 @@ extension Jet2TTError: LocalizedError {
             return NSLocalizedString("Response is not in appropriate format.", comment: "Bad Response")
         case .noInternet:
             return NSLocalizedString("Please check your internet connetion.", comment: "No Internet")
+        case .noRecords:
+            return NSLocalizedString("No records to show.", comment: "No Records")
         }
     }
 }

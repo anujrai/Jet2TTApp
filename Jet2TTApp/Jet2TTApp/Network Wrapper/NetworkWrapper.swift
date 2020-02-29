@@ -48,26 +48,29 @@ final class NetworkWrapper {
     {
         session.dataTask(with: url) { (data, response, error) in
             
-            guard let content = data, error == nil else {
-                debugPrint(error.debugDescription)
-                completionHandler(Jet2TTError.badResponse, nil)
-                return
-            }
-            
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                debugPrint("Bad error from gateway")
-                completionHandler(Jet2TTError.badResponse, nil)
-                return
-            }
-            
-            do {
-                let myNewObject = try JSONDecoder().decode(T.self, from: content)
-                debugPrint(myNewObject)
-                completionHandler(nil, myNewObject)
-            } catch {
-                debugPrint(Jet2TTError.badResponse.errorDescription!)
-                completionHandler(Jet2TTError.badResponse, nil)
-                return
+            DispatchQueue.main.async {
+                
+                guard let content = data, error == nil else {
+                    debugPrint(error.debugDescription)
+                    completionHandler(Jet2TTError.badResponse, nil)
+                    return
+                }
+                
+                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                    debugPrint("Bad error from gateway")
+                    completionHandler(Jet2TTError.badResponse, nil)
+                    return
+                }
+                
+                do {
+                    let myNewObject = try JSONDecoder().decode(T.self, from: content)
+                    debugPrint(myNewObject)
+                    completionHandler(nil, myNewObject)
+                } catch {
+                    debugPrint(Jet2TTError.badResponse.errorDescription!)
+                    completionHandler(Jet2TTError.badResponse, nil)
+                    return
+                }
             }
             
         }.resume()

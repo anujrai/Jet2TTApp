@@ -1,93 +1,125 @@
 //
 //  Members.swift
-//  Jet2TTApp
+//  VAManagerBuddy
 //
 //  Created by Anuj Rai on 22/02/20.
-//  Copyright © 2020 Anuj Rai. All rights reserved.
+//  Copyright © 2020 Vikash Anand. All rights reserved.
 //
 
 import Foundation
+import CoreData
 
-struct MemberResponse: Decodable {
+struct MemberResponse: Codable {
     let pageInfo: PageInfo?
     let results: [Member]?
     
-    private enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case pageInfo = "info"
         case results
     }
 }
-struct PageInfo: Decodable {
-    let pageNumber: Int?
-    let version: String?
+
+struct PageInfo: Codable {
     
     private enum CodingKeys: String, CodingKey {
-        case pageNumber = "page"
+        case pagenumber = "page"
         case version
     }
     
+    let pagenumber: Int16?
+    let version: String?
 }
 
-struct Member: Decodable {
-    let gender: String?
-    let name: Name?
-    let email: String?
-    let phone: String?
-    let profilePicture: Picture
-    let dob: DOB?
-    let location: Location?
+struct Member: Codable {
     
     private enum CodingKeys: String, CodingKey {
         case gender
         case name
         case email
         case phone
-        case profilePicture = "picture"
+        case picture = "picture"
         case dob
         case location
     }
+    
+    let gender: String?
+    let name: Name?
+    let email: String?
+    let phone: String?
+    var picture: Picture?
+    let dob: Dob?
+    let location: Location?
 }
 
-struct Name: Decodable {
+struct Name: Codable {
+    
     let title: String?
     let first: String?
     let last: String?
 }
 
-struct Picture: Decodable {
+struct Picture: Codable {
+
     let large: String?
     let medium: String?
     let thumbnail: String?
+    
+    var largeData: Data?
+    var mediumData: Data?
+    var thumbnailData: Data?
+    
+    enum CodingKeys: String, CodingKey {
+        case large
+        case medium
+        case thumbnail
+    }
+    
+    mutating func updateThumnailData(_ data: Data?) {
+        guard let imageData = data else { return }
+        self.thumbnailData = imageData
+    }
+    
+    mutating func updateLargeData(_ data: Data?) {
+        guard let imageData = data else { return }
+        self.largeData = imageData
+    }
+    
+    mutating func updateMediumData(_ data: Data?) {
+        guard let imageData = data else { return }
+        self.mediumData = imageData
+    }
 }
 
-struct DOB: Decodable {
+struct Dob: Codable {
+    
     let date: String?
-    let age: Int?
+    let age: Int16?
 }
 
-struct Location: Decodable {
-    let city, state, country: String?
-    //let postcode: Int?
+struct Location: Codable {
+    
+    let city: String?
+    let state: String?
+    let country: String?
 }
 
 extension Location {
-
+    
     var fullAddress: String {
-
+        
         // As response format is changing for Street some times from url, that is why not created model of street and not using that
         var address: String = ""
-       
+        
         if let city = self.city {
             address += "City- " + " " + city + " "
         }
         if let state = self.state {
             address += state + " "
         }
-
         if let country = self.country {
             address += "Country- " + " " + country + " "
         }
-
+        
         return address
     }
 }
