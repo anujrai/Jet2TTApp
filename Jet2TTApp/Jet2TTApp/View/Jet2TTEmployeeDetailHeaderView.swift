@@ -27,6 +27,7 @@ class Jet2TTEmployeeDetailHeaderView: UIView {
     private func setupView(memberDetail: Member) {
         let typeSelf = type(of: self)
         self.profileImageContainerView.layer.cornerRadius = self.profileImageContainerView.bounds.width / CGFloat(typeSelf.cornerRadiousDivderValue)
+       
         self.profileImageView.layer.cornerRadius = self.profileImageView.bounds.width / CGFloat(typeSelf.cornerRadiousDivderValue)
         self.backgroundColor = UIColor.randomColor()
         self.titleLabel.text = memberDetail.fullName

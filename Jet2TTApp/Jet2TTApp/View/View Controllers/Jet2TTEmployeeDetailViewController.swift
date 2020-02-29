@@ -51,9 +51,6 @@ final class Jet2TTEmployeeDetailViewController: UIViewController {
         frame.size.height = height
         headerView.frame = frame
 
-        headerView.setNeedsLayout()
-        headerView.layoutIfNeeded()
-        
         self.employeeDetailTableView.tableHeaderView = headerView
     }
     

@@ -203,7 +203,8 @@ extension Jet2TTEmployeeViewController: UITableViewDataSource {
         let member = members[indexPath.row] as Member
         cell.configure(withMember: member)
         
-        if (indexPath.row == members.count - Constants.gatewatFetcherCountForTable && members.count  < Constants.totalEmployeeDetilsCount ) {
+        if (indexPath.row == members.count - Constants.gatewatFetcherCountForTable && members.count  < Constants.totalEmployeeDetilsCount &&
+            ReachabilityManager.applicationConnectionMode == .online) {
             startMemberFetch()
         }
         
