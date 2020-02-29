@@ -40,6 +40,8 @@ List of features ready
 * Delete employee
 * Dark Mode Support
 * Offline support 
+* Show details of selected employee
+* In offline, manager can only see those employees whose details has been seen by manager, while Internet was presented.
 
 ## Status
 Project is: Done
