@@ -19,8 +19,31 @@ final class Jet2TTEmployeeViewController: UIViewController {
         case failed
     }
     
-    // MARK: Static Constants
-    private static let totalCount = 100
+    // MARK: Constants Enum
+    private enum Constants {
+        static let sortTitle = "Sort"
+        static let sortByTitle = "Sort By:"
+        static let pickSortingCriteria = "Pick a sorting criteria"
+        static let sortByLastName = "Last Name"
+        static let sortByAge = "Age"
+        static let cancel = "Cancel"
+        static let ok = "Ok"
+        static let delete = "Delete"
+        static let deleteTitle = "Delete Employee"
+        static let deleteMmessage = "Are you sure you want to permanently delete"
+        static let appIsonlineTitle = "Application is Online"
+        static let onlineMessage = "Do you want to switch back to online mode?"
+        static let noRecordsTitle = "No Records"
+        static let noRecordsMessage = "No record / records found."
+
+        static let tableAutomaticRowHeight = 100.0
+        static let gatewatFetcherCountForTable = 10
+        static let totalEmployeeDetilsCount = 1000
+        static let cellIdentifier = "employeeCell"
+        
+        
+    }
+
     
     // MARK: Variables
     var coreDataStack: Jet2TTCoreDataStack?
@@ -33,7 +56,7 @@ final class Jet2TTEmployeeViewController: UIViewController {
     private lazy var spinnerView: SpinnerView = SpinnerView()
     private lazy var networkFetcher: GatewayFetcher = GatewayFetcher()
     private lazy var sortBarButtonItem: UIBarButtonItem = {
-        let barButtonItem = UIBarButtonItem(title: "Sort", style: .plain, target: self, action: #selector(showSortMenu))
+        let barButtonItem = UIBarButtonItem(title: Constants.sortTitle, style: .plain, target: self, action: #selector(showSortMenu))
         return barButtonItem
     }()
     
@@ -76,12 +99,13 @@ final class Jet2TTEmployeeViewController: UIViewController {
         self.sortBarButtonItem.isEnabled = false
         self.navigationItem.rightBarButtonItem = self.sortBarButtonItem
         self.employeeTableView.estimatedRowHeight = UITableView.automaticDimension
-        self.employeeTableView.rowHeight = 100.0
+        self.employeeTableView.rowHeight = CGFloat(Constants.tableAutomaticRowHeight)
         self.title = "Employees"
         
         startMemberFetch()
     }
     
+    // MARK: Private and Public functions
     private func startMemberFetch() {
         
         ReachabilityManager.updateApplicationConnectionStatus()
@@ -147,6 +171,19 @@ final class Jet2TTEmployeeViewController: UIViewController {
             }
         }
     }
+    
+    private func sortByLastName(alertAction: UIAlertAction!) {
+          if let members = self.members {
+              self.members = self.viewModel?.sortEmployee(by: .lastName, members: members)
+          }
+      }
+      
+      private func sortByAge(alertAction: UIAlertAction!) {
+          if let members = self.members {
+              self.members = self.viewModel?.sortEmployee(by: .age, members: members)
+          }
+      }
+    
 }
 
 
@@ -158,7 +195,7 @@ extension Jet2TTEmployeeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "employeeCell") as? Jet2TTEmployeeCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier) as? Jet2TTEmployeeCell else {
             return UITableViewCell()
         }
         
@@ -166,7 +203,7 @@ extension Jet2TTEmployeeViewController: UITableViewDataSource {
         let member = members[indexPath.row] as Member
         cell.configure(withMember: member)
         
-        if (indexPath.row == members.count - 10 && members.count  < Jet2TTEmployeeViewController.totalCount ) {
+        if (indexPath.row == members.count - Constants.gatewatFetcherCountForTable && members.count  < Constants.totalEmployeeDetilsCount ) {
             startMemberFetch()
         }
         
@@ -209,72 +246,50 @@ extension Jet2TTEmployeeViewController: UITableViewDelegate {
 
 extension Jet2TTEmployeeViewController {
     
-    private func sortByLastName(alertAction: UIAlertAction!) {
-        if let members = self.members {
-            self.members = self.viewModel?.sortEmployee(by: .lastName, members: members)
-        }
-    }
-    
-    private func sortByAge(alertAction: UIAlertAction!) {
-        if let members = self.members {
-            self.members = self.viewModel?.sortEmployee(by: .age, members: members)
-        }
-    }
-}
-
-extension Jet2TTEmployeeViewController {
-    
     @objc func showSortMenu() {
         
-        let title = "Sort By:"
-        let message = "Pick a sorting criteria"
-        let sortByLastNameAction = UIAlertAction(title: "Last Name", style: .default, handler: sortByLastName)
-        let sortByAgeAction = UIAlertAction(title: "Age", style: .default, handler: sortByAge)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let sortByLastNameAction = UIAlertAction(title: Constants.sortByLastName, style: .default, handler: sortByLastName)
+        let sortByAgeAction = UIAlertAction(title: Constants.sortByAge, style: .default, handler: sortByAge)
+        let cancelAction = UIAlertAction(title: Constants.cancel, style: .cancel, handler: nil)
         
         UIAlertController.showAlert(inParent: self,
                                     preferredStyle: .actionSheet,
-                                    withTitle: title,
-                                    alertMessage: message,
+                                    withTitle: Constants.sortByTitle,
+                                    alertMessage: Constants.pickSortingCriteria,
                                     andAlertActions: [sortByLastNameAction, sortByAgeAction, cancelAction])
     }
     
     func showSwitchToOnlineMode() {
         
-        let title = "Application is Online"
-        let message = "Do you want to switch back to online mode?"
-        let switchBackToOnlineModeAction = UIAlertAction(title: "Ok", style: .default, handler: switchBackToOnlineMode)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let switchBackToOnlineModeAction = UIAlertAction(title: Constants.ok, style: .default, handler: switchBackToOnlineMode)
+        let cancelAction = UIAlertAction(title: Constants.cancel, style: .cancel, handler: nil)
         
         UIAlertController.showAlert(inParent: self,
                                     preferredStyle: .alert,
-                                    withTitle: title,
-                                    alertMessage: message,
+                                    withTitle: Constants.appIsonlineTitle,
+                                    alertMessage: Constants.onlineMessage,
                                     andAlertActions: [switchBackToOnlineModeAction, cancelAction])
     }
     
     func showNoRecordsPrompt() {
-        let title = "No Records"
-        let message = "No record / records found."
-        let switchBackToOnlineModeAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        let switchBackToOnlineModeAction = UIAlertAction(title: Constants.ok, style: .default, handler: nil)
         
         UIAlertController.showAlert(inParent: self,
                                     preferredStyle: .alert,
-                                    withTitle: title,
-                                    alertMessage: message,
+                                    withTitle: Constants.noRecordsTitle,
+                                    alertMessage: Constants.noRecordsMessage,
                                     andAlertActions: [switchBackToOnlineModeAction])
     }
     
     private func confirmDelete(memeber: Member) {
         
-        let title = "Delete Employee"
-        let message = "Are you sure you want to permanently delete \(memeber.fullName)?"
-        let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: handleDeleteEmployee)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: handleCancelAction)
+        let message = "\(Constants.deleteMmessage) \(memeber.fullName)?"
+        let deleteAction = UIAlertAction(title: Constants.delete, style: .destructive, handler: handleDeleteEmployee)
+        let cancelAction = UIAlertAction(title: Constants.cancel, style: .cancel, handler: handleCancelAction)
         
         UIAlertController.showAlert(inParent: self,
                                     preferredStyle: .actionSheet,
-                                    withTitle: title,
+                                    withTitle: Constants.deleteTitle,
                                     alertMessage: message,
                                     andAlertActions: [deleteAction, cancelAction])
     }

@@ -33,7 +33,6 @@ final class Jet2TTEmployeeViewModel {
     }
     
     func sortEmployee(by sort: SortBy, members: [Member])-> [Member] {
-        
         switch sort {
             
         case .age:
