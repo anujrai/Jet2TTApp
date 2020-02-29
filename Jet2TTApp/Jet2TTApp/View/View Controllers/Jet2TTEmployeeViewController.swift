@@ -10,6 +10,8 @@ import UIKit
 
 final class Jet2TTEmployeeViewController: UIViewController {
     
+    // MARK: UIStateForDataFetching Enum
+    
     private enum UIStateForDataFetching: String {
         case notConnected
         case fetching
@@ -17,11 +19,19 @@ final class Jet2TTEmployeeViewController: UIViewController {
         case failed
     }
     
+    // MARK: Static Constants
     private static let totalCount = 100
-    private var deleteEmployeeIndexPath: NSIndexPath? = nil
     
+    // MARK: Variables
     var coreDataStack: Jet2TTCoreDataStack?
-    
+    private var deleteEmployeeIndexPath: NSIndexPath? = nil
+    var members: [Member]? {
+           didSet {
+               self.employeeTableView.reloadData()
+           }
+       }
+    private lazy var spinnerView: SpinnerView = SpinnerView()
+    private lazy var networkFetcher: GatewayFetcher = GatewayFetcher()
     private lazy var sortBarButtonItem: UIBarButtonItem = {
         let barButtonItem = UIBarButtonItem(title: "Sort", style: .plain, target: self, action: #selector(showSortMenu))
         return barButtonItem
@@ -32,7 +42,6 @@ final class Jet2TTEmployeeViewController: UIViewController {
         return Jet2TTCoreDataManager(managedObjectContext: coreDataStack.mainContext, coreDataStack: coreDataStack)
     }()
     
-    private lazy var networkFetcher: NetworkFetcher = NetworkFetcher()
 
     private var viewModel: Jet2TTEmployeeViewModel? {
         if ReachabilityManager.applicationConnectionMode == .online {
@@ -42,15 +51,8 @@ final class Jet2TTEmployeeViewController: UIViewController {
             return Jet2TTEmployeeViewModel(coreDataManager)
         }
     }
-    
-    var members: [Member]? {
-        didSet {
-            self.employeeTableView.reloadData()
-        }
-    }
-    
-    lazy var spinnerView: SpinnerView = SpinnerView()
-    lazy var noConnectionView: Jet2TTNoConnectionView = Jet2TTNoConnectionView { [weak self] in
+        
+    private lazy var noConnectionView: Jet2TTNoConnectionView = Jet2TTNoConnectionView { [weak self] in
         self?.retryMemberFetch()
     }
     
@@ -209,23 +211,13 @@ extension Jet2TTEmployeeViewController {
     
     private func sortByLastName(alertAction: UIAlertAction!) {
         if let members = self.members {
-            let sortedArray = members.sorted {
-                let lastName0 = $0.name?.last ?? ""
-                let lastName1 = $1.name?.last ?? ""
-                return lastName0 < lastName1
-            }
-            self.members = sortedArray
+            self.members = self.viewModel?.sortEmployee(by: .lastName, members: members)
         }
     }
     
     private func sortByAge(alertAction: UIAlertAction!) {
         if let members = self.members {
-            let sortedArray = members.sorted {
-                let age0 = $0.dob?.age ?? -1
-                let age1 = $1.dob?.age ?? -1
-                return age0 < age1
-            }
-            self.members = sortedArray
+            self.members = self.viewModel?.sortEmployee(by: .age, members: members)
         }
     }
 }

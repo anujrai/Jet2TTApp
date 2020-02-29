@@ -12,11 +12,12 @@ protocol MemberFetchable {
     func fetchMembers(onSuccess success: @escaping ([Member]?) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
 }
 
+enum SortBy: String {
+    case age
+    case lastName
+}
+
 final class Jet2TTEmployeeViewModel {
-    
-    // MARK: - Variables
-    private static let memberUrlString = "https://randomuser.me/api/?results=20"
-    private var memberResponse: MemberResponse?
     
     let dataSource: MemberFetchable
     init(_ dataSource: MemberFetchable) {
@@ -30,9 +31,34 @@ final class Jet2TTEmployeeViewModel {
         failure(error)
         })
     }
+    
+    func sortEmployee(by sort: SortBy, members: [Member])-> [Member] {
+        
+        switch sort {
+            
+        case .age:
+            let sortedArray = members.sorted {
+                let age0 = $0.dob?.age ?? -1
+                let age1 = $1.dob?.age ?? -1
+                return age0 < age1
+            }
+            return sortedArray
+            
+        case .lastName:
+            let sortedArray = members.sorted {
+                let lastName0 = $0.name?.last ?? ""
+                let lastName1 = $1.name?.last ?? ""
+                return lastName0 < lastName1
+            }
+            return sortedArray
+        }
+    }
 }
 
-final class NetworkFetcher: MemberFetchable {
+
+/// Used for getting the response of memeber
+
+final class GatewayFetcher: MemberFetchable {
     
     private var members: [Member]?
     private var memberResponse: MemberResponse?
