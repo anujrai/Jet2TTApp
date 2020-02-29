@@ -26,7 +26,6 @@ extension URLSessionDataTask: URLSessionDataTaskProtocol {}
 
 final class NetworkWrapper {
     
-    private static let urlString = URL(string: "https://randomuser.me/api/?results=5")
     static let sharedInstance = NetworkWrapper()
     private init(){}
     
