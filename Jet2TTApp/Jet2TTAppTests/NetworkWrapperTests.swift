@@ -123,7 +123,8 @@ class NetworkWrapperTests: XCTestCase {
             func dataTask(with url: URL,
                  completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
                 self.lastUrl = url
-                completionHandler(self.data, nil, nil)
+                let urlResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)
+                completionHandler(self.data, urlResponse, nil)
                 return URLSessionDataTaskMock()
             }
         }

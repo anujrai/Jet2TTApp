@@ -8,15 +8,14 @@
 
 import UIKit
 
-class MemberDetailHeaderView: UIView {
+class Jet2TTEmployeeDetailHeaderView: UIView {
     
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var profileImageContainerView: UIView!
     @IBOutlet var profileImageView: UIImageView!
-    @IBOutlet var largeProfileImageView: UIImageView!
     
-    func instantiateHeaderView(with selectedMemberDetail: Member) -> MemberDetailHeaderView? {
-        guard let memberView = Bundle.main.loadNibNamed("MemberDetailHeaderView", owner: self, options: nil)![0] as? MemberDetailHeaderView  else { return nil }
+    func instantiateHeaderView(with selectedMemberDetail: Member) -> Jet2TTEmployeeDetailHeaderView? {
+        guard let memberView = Bundle.main.loadNibNamed("Jet2TTEmployeeDetailHeaderView", owner: self, options: nil)![0] as? Jet2TTEmployeeDetailHeaderView  else { return nil }
         memberView.setupView(memberDetail: selectedMemberDetail)
         return memberView
     }
@@ -31,18 +30,10 @@ class MemberDetailHeaderView: UIView {
             if let urlString = memberDetail.picture?.medium, let url = URL(string: urlString) {
                 self.profileImageView.loadImage(at: url)
             }
-            if let urlString = memberDetail.picture?.large, let url = URL(string: urlString) {
-                self.largeProfileImageView.loadImage(at: url)
-            }
         } else {
             if let imageData = memberDetail.picture?.mediumData {
                 self.profileImageView.image = UIImage(data: imageData)
             }
-            if let imageData = memberDetail.picture?.largeData {
-                self.largeProfileImageView.image = UIImage(data: imageData)
-            }
         }
     }
 }
-
-

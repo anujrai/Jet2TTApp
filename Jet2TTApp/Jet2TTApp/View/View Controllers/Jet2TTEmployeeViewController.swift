@@ -26,9 +26,9 @@ final class Jet2TTEmployeeViewController: UIViewController {
         return barButtonItem
     }()
     
-    private lazy var coreDataManager: CoreDataManager? = {
+    private lazy var coreDataManager: Jet2TTCoreDataManager? = {
         guard let coreDataStack = self.coreDataStack else { return nil }
-        return CoreDataManager(managedObjectContext: coreDataStack.mainContext, coreDataStack: coreDataStack)
+        return Jet2TTCoreDataManager(managedObjectContext: coreDataStack.mainContext, coreDataStack: coreDataStack)
     }()
     
     private lazy var networkFetcher: NetworkFetcher = NetworkFetcher()
@@ -176,7 +176,7 @@ extension Jet2TTEmployeeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
-        let detailView = UIStoryboard.instantiateViewcontroller(ofType: Jet2TTEmployeeViewController.self) as! Jet2TTEmployeeDetailViewController
+        let detailView = UIStoryboard.instantiateViewcontroller(ofType: Jet2TTEmployeeDetailViewController.self) as! Jet2TTEmployeeDetailViewController
         
         detailView.coreDataManager = self.coreDataManager
         

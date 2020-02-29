@@ -17,7 +17,6 @@ extension CD_Picture {
         return NSFetchRequest<CD_Picture>(entityName: "CD_Picture")
     }
 
-    @NSManaged public var largeImage: NSData?
     @NSManaged public var mediumImage: NSData?
     @NSManaged public var thumbnailImage: NSData?
     @NSManaged public var member: CD_Member?

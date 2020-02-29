@@ -23,12 +23,10 @@ final class PictureService {
 extension PictureService {
     
     func storePicture(_ thumbNailData: Data?,
-                      _ mediumData: Data?,
-                      _ largeData: Data?) -> CD_Picture {
+                      _ mediumData: Data?) -> CD_Picture {
         let picture = CD_Picture(context: managedObjectContext)
         picture.thumbnailImage = thumbNailData as NSData?
         picture.mediumImage = mediumData as NSData?
-        picture.largeImage = largeData as NSData?
         
         coreDataStack.saveContext(managedObjectContext)
         return picture

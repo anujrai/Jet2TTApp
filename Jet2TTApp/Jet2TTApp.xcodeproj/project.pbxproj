@@ -23,7 +23,7 @@
 		754D771524044E1200769039 /* Jet2TTEmployeeDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754D771424044E1200769039 /* Jet2TTEmployeeDetailHeaderView.swift */; };
 		754D771724044E4300769039 /* Jet2TTEmployeeDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 754D771624044E4300769039 /* Jet2TTEmployeeDetailHeaderView.xib */; };
 		7560A8DF240A24010081679D /* Jet2TTApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7560A8DB240A24010081679D /* Jet2TTApp.xcdatamodeld */; };
-		7560A8E0240A24010081679D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A8DD240A24010081679D /* CoreDataManager.swift */; };
+		7560A8E0240A24010081679D /* Jet2TTCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A8DD240A24010081679D /* Jet2TTCoreDataManager.swift */; };
 		7560A8E1240A24010081679D /* Jet2TTCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A8DE240A24010081679D /* Jet2TTCoreDataStack.swift */; };
 		7560A8E4240A27620081679D /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A8E2240A27610081679D /* Reachability.swift */; };
 		7560A8E5240A27620081679D /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A8E3240A27620081679D /* ReachabilityManager.swift */; };
@@ -82,7 +82,7 @@
 		754D771424044E1200769039 /* Jet2TTEmployeeDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jet2TTEmployeeDetailHeaderView.swift; sourceTree = "<group>"; };
 		754D771624044E4300769039 /* Jet2TTEmployeeDetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Jet2TTEmployeeDetailHeaderView.xib; sourceTree = "<group>"; };
 		7560A8DC240A24010081679D /* VAManagerBuddy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VAManagerBuddy.xcdatamodel; sourceTree = "<group>"; };
-		7560A8DD240A24010081679D /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		7560A8DD240A24010081679D /* Jet2TTCoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Jet2TTCoreDataManager.swift; sourceTree = "<group>"; };
 		7560A8DE240A24010081679D /* Jet2TTCoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Jet2TTCoreDataStack.swift; sourceTree = "<group>"; };
 		7560A8E2240A27610081679D /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		7560A8E3240A27620081679D /* ReachabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
@@ -199,7 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				7560A8E6240A2AE60081679D /* Core Data Model */,
-				7560A8DD240A24010081679D /* CoreDataManager.swift */,
+				7560A8DD240A24010081679D /* Jet2TTCoreDataManager.swift */,
 				7560A8DE240A24010081679D /* Jet2TTCoreDataStack.swift */,
 				7560A8DB240A24010081679D /* Jet2TTApp.xcdatamodeld */,
 			);
@@ -405,7 +405,7 @@
 				754CF8CA24030AE500483CCF /* NetworkWrapper.swift in Sources */,
 				7560A90A240A2AFF0081679D /* MemberService.swift in Sources */,
 				754CF8CD24030B3D00483CCF /* Jet2TTError.swift in Sources */,
-				7560A8E0240A24010081679D /* CoreDataManager.swift in Sources */,
+				7560A8E0240A24010081679D /* Jet2TTCoreDataManager.swift in Sources */,
 				754D771324044DC100769039 /* Jet2TTEmployeeDetailCell.swift in Sources */,
 				754CF8E02403109C00483CCF /* Jet2TTNoConnectionView.swift in Sources */,
 				754CF8D124030CA000483CCF /* ImageDownloader.swift in Sources */,

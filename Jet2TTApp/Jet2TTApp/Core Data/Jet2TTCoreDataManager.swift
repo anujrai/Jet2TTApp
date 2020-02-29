@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-final class CoreDataManager: MemberFetchable {
+final class Jet2TTCoreDataManager: MemberFetchable {
     
     var members: [Member]?
     let managedObjectContext: NSManagedObjectContext
@@ -18,13 +18,6 @@ final class CoreDataManager: MemberFetchable {
     init(managedObjectContext: NSManagedObjectContext, coreDataStack: Jet2TTCoreDataStack) {
         self.managedObjectContext = managedObjectContext
         self.coreDataStack = coreDataStack
-        
-        // Add Observer
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: managedObjectContext)
-        notificationCenter.addObserver(self, selector: #selector(managedObjectContextWillSave), name: NSNotification.Name.NSManagedObjectContextWillSave, object: managedObjectContext)
-        notificationCenter.addObserver(self, selector: #selector(NSManagedObjectContextDidSaveNotification), name:NSNotification.Name.NSManagedObjectContextDidSave , object: managedObjectContext)
-        
     }
     
     func fetchMembers(onSuccess success: @escaping ([Member]?) -> Void,
@@ -73,7 +66,6 @@ final class CoreDataManager: MemberFetchable {
             let picture = Picture(large: nil,
                                   medium: nil,
                                   thumbnail: nil,
-                                  largeData: coreDataMember.picture?.largeImage as Data?,
                                   mediumData: coreDataMember.picture?.mediumImage as Data?,
                                   thumbnailData: coreDataMember.picture?.thumbnailImage as Data?)
             
@@ -91,19 +83,12 @@ final class CoreDataManager: MemberFetchable {
         
         return members
     }
-    
-    deinit {
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.removeObserver(self, name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: managedObjectContext)
-        notificationCenter.removeObserver(self, name: NSNotification.Name.NSManagedObjectContextWillSave, object: managedObjectContext)
-        notificationCenter.removeObserver(self, name: NSNotification.Name.NSManagedObjectContextDidSave, object: managedObjectContext)
-    }
 }
 
 
-extension CoreDataManager {
+extension Jet2TTCoreDataManager {
     
-    func storeMember(member: Member, _ thumbnailData: Data?, _ largeData: Data?, mediumData: Data?) {
+    func storeMember(member: Member, _ thumbnailData: Data?, mediumData: Data?) {
         
         let nameService = NameService(managedObjectContext: managedObjectContext, coreDataStack: coreDataStack)
         let name = nameService.storeName(member.name?.title, member.name?.first, member.name?.last)
@@ -115,7 +100,7 @@ extension CoreDataManager {
         let dob = dobService.storeDOB(member.dob?.age, member.dob?.date)
         
         let pictureService = PictureService(managedObjectContext: managedObjectContext, coreDataStack: coreDataStack)
-        let picture = pictureService.storePicture(thumbnailData, mediumData, largeData)
+        let picture = pictureService.storePicture(thumbnailData, mediumData)
         
         let coreDatamember = MemberService(managedObjectContext: self.managedObjectContext, coreDataContext: self.coreDataStack)
         
@@ -126,80 +111,5 @@ extension CoreDataManager {
                                                 name,
                                                 location,
                                                 dob)
-    }
-}
-
-extension CoreDataManager {
-    
-    @objc func managedObjectContextObjectsDidChange(notification: NSNotification) {
-        guard let userInfo = notification.userInfo else { return }
-        
-        if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, inserts.count > 0 {
-            print("--- INSERTS ---")
-            print(inserts)
-            print("+++++++++++++++")
-        }
-        
-        if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject> , updates.count > 0 {
-            print("--- UPDATES ---")
-            for update in updates {
-                print(update.changedValues())
-            }
-            print("+++++++++++++++")
-        }
-        
-        if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject> , deletes.count > 0 {
-            print("--- DELETES ---")
-            print(deletes)
-            print("+++++++++++++++")
-        }
-    }
-    
-    @objc func managedObjectContextWillSave(notification: NSNotification) {
-        guard let userInfo = notification.userInfo else { return }
-        
-        if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject> , inserts.count > 0 {
-            print("--- INSERTS ---")
-            print(inserts)
-            print("+++++++++++++++")
-        }
-        
-        if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject> , updates.count > 0 {
-            print("--- UPDATES ---")
-            for update in updates {
-                print(update.changedValues())
-            }
-            print("+++++++++++++++")
-        }
-        
-        if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject> , deletes.count > 0 {
-            print("--- DELETES ---")
-            print(deletes)
-            print("+++++++++++++++")
-        }
-    }
-    
-    @objc func NSManagedObjectContextDidSaveNotification(notification: NSNotification) {
-        guard let userInfo = notification.userInfo else { return }
-        
-        if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject> , inserts.count > 0 {
-            print("--- INSERTS ---")
-            print(inserts)
-            print("+++++++++++++++")
-        }
-        
-        if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject> , updates.count > 0 {
-            print("--- UPDATES ---")
-            for update in updates {
-                print(update.changedValues())
-            }
-            print("+++++++++++++++")
-        }
-        
-        if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject> , deletes.count > 0 {
-            print("--- DELETES ---")
-            print(deletes)
-            print("+++++++++++++++")
-        }
     }
 }

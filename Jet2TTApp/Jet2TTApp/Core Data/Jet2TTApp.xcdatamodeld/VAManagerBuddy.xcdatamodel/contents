@@ -1,46 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.98" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="19B88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CD_Dob" representedClassName=".CD_Dob" syncable="YES">
-        <attribute name="age" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="member" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CD_Member" inverseName="dob" inverseEntity="CD_Member" syncable="YES"/>
+        <attribute name="age" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <relationship name="member" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CD_Member" inverseName="dob" inverseEntity="CD_Member"/>
     </entity>
     <entity name="CD_Location" representedClassName=".CD_Location" syncable="YES">
-        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="member" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CD_Member" inverseName="location" inverseEntity="CD_Member" syncable="YES"/>
+        <attribute name="city" optional="YES" attributeType="String"/>
+        <attribute name="country" optional="YES" attributeType="String"/>
+        <attribute name="state" optional="YES" attributeType="String"/>
+        <relationship name="member" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CD_Member" inverseName="location" inverseEntity="CD_Member"/>
     </entity>
     <entity name="CD_Member" representedClassName=".CD_Member" syncable="YES">
-        <attribute name="email" optional="YES" attributeType="String">
-            <userInfo/>
-        </attribute>
-        <attribute name="gender" optional="YES" attributeType="String">
-            <userInfo/>
-        </attribute>
-        <attribute name="phone" optional="YES" attributeType="String">
-            <userInfo/>
-        </attribute>
-        <relationship name="dob" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CD_Dob" inverseName="member" inverseEntity="CD_Dob" syncable="YES"/>
-        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CD_Location" inverseName="member" inverseEntity="CD_Location" syncable="YES"/>
-        <relationship name="name" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CD_Name" inverseName="member" inverseEntity="CD_Name" syncable="YES"/>
-        <relationship name="picture" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CD_Picture" inverseName="member" inverseEntity="CD_Picture" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="gender" optional="YES" attributeType="String"/>
+        <attribute name="phone" optional="YES" attributeType="String"/>
+        <relationship name="dob" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CD_Dob" inverseName="member" inverseEntity="CD_Dob"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CD_Location" inverseName="member" inverseEntity="CD_Location"/>
+        <relationship name="name" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CD_Name" inverseName="member" inverseEntity="CD_Name"/>
+        <relationship name="picture" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CD_Picture" inverseName="member" inverseEntity="CD_Picture"/>
     </entity>
     <entity name="CD_Name" representedClassName=".CD_Name" syncable="YES">
-        <attribute name="first" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="last" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="member" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CD_Member" inverseName="name" inverseEntity="CD_Member" syncable="YES"/>
+        <attribute name="first" optional="YES" attributeType="String"/>
+        <attribute name="last" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="member" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CD_Member" inverseName="name" inverseEntity="CD_Member"/>
     </entity>
     <entity name="CD_PageInfo" representedClassName=".CD_PageInfo" syncable="YES">
-        <attribute name="pagenumber" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="version" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pagenumber" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="version" optional="YES" attributeType="String"/>
     </entity>
     <entity name="CD_Picture" representedClassName=".CD_Picture" syncable="YES">
-        <attribute name="largeImage" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
-        <attribute name="mediumImage" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
-        <attribute name="thumbnailImage" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
-        <relationship name="member" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CD_Member" inverseName="picture" inverseEntity="CD_Member" syncable="YES"/>
+        <attribute name="mediumImage" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="thumbnailImage" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <relationship name="member" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CD_Member" inverseName="picture" inverseEntity="CD_Member"/>
     </entity>
     <elements>
         <element name="CD_Dob" positionX="-45" positionY="63" width="128" height="90"/>
@@ -48,6 +41,6 @@
         <element name="CD_Member" positionX="-63" positionY="-18" width="128" height="150"/>
         <element name="CD_Name" positionX="-36" positionY="36" width="128" height="105"/>
         <element name="CD_PageInfo" positionX="-18" positionY="45" width="128" height="75"/>
-        <element name="CD_Picture" positionX="-54" positionY="-9" width="128" height="105"/>
+        <element name="CD_Picture" positionX="-54" positionY="-9" width="128" height="88"/>
     </elements>
 </model>

@@ -25,7 +25,7 @@ class Jet2TTNoConnectionView: UIView {
         button.layer.borderColor = UIColor.cyan.cgColor
         button.layer.borderWidth = 2.0
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Retry", for: .normal)
+        button.setTitle("Go Offline", for: .normal)
         button.setTitleColor(UIColor.darkGray, for: .normal)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         return button
@@ -55,7 +55,7 @@ class Jet2TTNoConnectionView: UIView {
         ])
         
         NSLayoutConstraint.activate([
-            self.button.widthAnchor.constraint(equalToConstant: 80),
+            self.button.widthAnchor.constraint(equalToConstant: 90),
             self.button.heightAnchor.constraint(equalToConstant: 35),
             self.button.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             self.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: self.button.bottomAnchor, constant: 75)

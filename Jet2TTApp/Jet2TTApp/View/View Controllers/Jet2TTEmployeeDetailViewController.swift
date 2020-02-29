@@ -13,7 +13,7 @@ final class Jet2TTEmployeeDetailViewController: UIViewController {
     // MARK: - Variables
 
     var selectedMemeber: Member?
-    var coreDataManager: CoreDataManager?
+    var coreDataManager: Jet2TTCoreDataManager?
     
     // MARK: - View Life Cycle
 
@@ -25,9 +25,9 @@ final class Jet2TTEmployeeDetailViewController: UIViewController {
         }
     }
     
-    private lazy var headerView: MemberDetailHeaderView? = {
+    private lazy var headerView: Jet2TTEmployeeDetailHeaderView? = {
         guard let selectedMemeber = self.selectedMemeber else { return nil }
-        return MemberDetailHeaderView().instantiateHeaderView(with: selectedMemeber)
+        return Jet2TTEmployeeDetailHeaderView().instantiateHeaderView(with: selectedMemeber)
     }()
     
     override func viewDidLoad() {
@@ -66,7 +66,6 @@ final class Jet2TTEmployeeDetailViewController: UIViewController {
                    else { return }
                coreDataManager.storeMember(member: selectedMember,
                                            selectedMember.picture?.thumbnailData,
-                                           headerView.largeProfileImageView.image?.pngData(),
                                            mediumData: headerView.profileImageView.image?.pngData())
            }
        }
