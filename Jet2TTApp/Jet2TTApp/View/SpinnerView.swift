@@ -29,8 +29,14 @@ class SpinnerView: UIView {
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
         var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-        activityIndicator.style =
-            UIActivityIndicatorView.Style.whiteLarge
+        if #available(iOS 13, *) {
+            activityIndicator.style =
+                UIActivityIndicatorView.Style.large
+        } else {
+            activityIndicator.style =
+                UIActivityIndicatorView.Style.whiteLarge
+        }
+        
         activityIndicator.hidesWhenStopped = true
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         return activityIndicator
