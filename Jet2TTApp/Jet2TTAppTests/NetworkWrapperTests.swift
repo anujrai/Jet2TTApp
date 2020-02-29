@@ -1,10 +1,10 @@
 //
-//  VAManagerBuddyTests.swift
-//  VAManagerBuddyTests
+//  NetworkWrapperTests.swift
+//  Jet2TTApp
 //
-//  Created by Vikash Anand on 22/02/20.
-//  Copyright © 2020 Vikash Anand. All rights reserved.
-//
+//  Created by Anuj Rai on 24/02/20.
+//  Copyright © 2020 Anuj Rai. All rights reserved.
+
 
 import XCTest
 @testable import Jet2TTApp

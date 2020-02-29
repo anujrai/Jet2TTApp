@@ -10,6 +10,9 @@ import UIKit
 
 class Jet2TTEmployeeCell: UITableViewCell {
     
+    private static let cornerRadiousDivderValue = 2.0
+    private static let thumbnailIcon = "default-profile-icon"
+    
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var genderLabel: UILabel!
     @IBOutlet var titleView: Jet2TTTitleView!
@@ -17,7 +20,7 @@ class Jet2TTEmployeeCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.thumbnailImageView.layer.cornerRadius = self.thumbnailImageView.bounds.width / 2.0
+        self.thumbnailImageView.layer.cornerRadius = self.thumbnailImageView.bounds.width / CGFloat(type(of: self).cornerRadiousDivderValue)
     }
     
     override func prepareForReuse() {
@@ -25,7 +28,7 @@ class Jet2TTEmployeeCell: UITableViewCell {
         self.genderLabel.text = nil
         self.titleView.update(with: nil)
         self.thumbnailImageView.cancelImageLoad()
-        self.thumbnailImageView.image = UIImage(named: "default-profile-icon")!
+        self.thumbnailImageView.image = UIImage(named: type(of: self).thumbnailIcon)
     }
     
     func configure(withMember member: Member) {

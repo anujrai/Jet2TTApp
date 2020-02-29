@@ -17,8 +17,9 @@ final class Jet2TTEmployeeViewController: UIViewController {
         case failed
     }
     
-    private static let totalCount = 50
+    private static let totalCount = 100
     private var deleteEmployeeIndexPath: NSIndexPath? = nil
+    
     var coreDataStack: Jet2TTCoreDataStack?
     
     private lazy var sortBarButtonItem: UIBarButtonItem = {
