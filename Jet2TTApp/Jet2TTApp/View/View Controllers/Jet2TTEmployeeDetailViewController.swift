@@ -15,8 +15,6 @@ final class Jet2TTEmployeeDetailViewController: UIViewController {
     var selectedMemeber: Member?
     var coreDataManager: Jet2TTCoreDataManager?
     
-    // MARK: - View Life Cycle
-
    // MARK: - View Life Cycle
     @IBOutlet var employeeDetailTableView: UITableView! {
         didSet {

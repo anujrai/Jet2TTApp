@@ -35,6 +35,7 @@ final class Jet2TTEmployeeViewController: UIViewController {
         static let onlineMessage = "Do you want to switch back to online mode?"
         static let noRecordsTitle = "No Records"
         static let noRecordsMessage = "No record / records found."
+        static let screenTitle = "Employees"
 
         static let tableAutomaticRowHeight = 100.0
         static let gatewatFetcherCountForTable = 10
@@ -100,7 +101,7 @@ final class Jet2TTEmployeeViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = self.sortBarButtonItem
         self.employeeTableView.estimatedRowHeight = UITableView.automaticDimension
         self.employeeTableView.rowHeight = CGFloat(Constants.tableAutomaticRowHeight)
-        self.title = "Employees"
+        self.title = Constants.screenTitle
         
         startMemberFetch()
     }
